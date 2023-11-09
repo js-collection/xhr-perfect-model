@@ -37,36 +37,36 @@ You can use all you want into the form, or not use the form with a complete new 
   ```
 
 - make a form with you data or a function for you API, like:
-```html
-  <html>
-    <form id="test">
-        <!--THIS IS A STUPID MODEL, MAKE YOU A CUSTOM DATA-->
-        <input multiple="false" name="collector" type="file">
-        <input name="test" type="text" placeholder="write every you wont ;)">
-        <button name="tester">TEST DATA</button>
-    </form>
-  </html>
-  <script>
-    window.onload = () => {
-      if (document.readyState == 'complete') {
-
-        //test api and system
-        function API_TEST() {
-
-          let form = document.forms[ 'test' ],
-              formfiles = form['collector'],
-              testnow = form[ 'tester' ]
-
-           testnow.onclick = () => {
-               //do operations and call api...
-           }
-
+  ```html
+    <html>
+      <form id="test">
+          <!--THIS IS A STUPID MODEL, MAKE YOU A CUSTOM DATA-->
+          <input multiple="false" name="collector" type="file">
+          <input name="test" type="text" placeholder="write every you wont ;)">
+          <button name="tester">TEST DATA</button>
+      </form>
+    </html>
+    <script>
+      window.onload = () => {
+        if (document.readyState == 'complete') {
+  
+          //test api and system
+          function API_TEST() {
+  
+            let form = document.forms[ 'test' ],
+                formfiles = form['collector'],
+                testnow = form[ 'tester' ]
+  
+             testnow.onclick = () => {
+                 //do operations and call api...
+             }
+  
+         }
+  
        }
-
      }
-   }
-  </script>
-```
+    </script>
+  ```
 
 - use asset to call the class for talk with your api walkie talkie like this:
 
