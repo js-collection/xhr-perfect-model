@@ -68,7 +68,7 @@ You can use all you want into the form, or not use the form with a complete new 
     </script>
   ```
 
-- use asset to call the class for talk with your api walkie talkie like this:
+- _XHR CLASSIC:_ use asset to call the class for talk with your api walkie talkie like this:
 
   ```js
   // set endpoint target profile (it's a demo)
@@ -98,5 +98,57 @@ You can use all you want into the form, or not use the form with a complete new 
   - progress return the object with progression data sended (an exemple, the bytes and percentage of file sending) and it is called for many times how steps needed for completation (or failing)
   - results is the final data resulted of operations... the payloads, the restful json object of end operations
  
+- _XHR ASYNC:_ in an async function or asset, use below codes to call the class for talk with your api walkie talkie like this:
+
+  ```js
+  // set endpoint target profile (it's a demo)
+
+  var profile = { 
+      action :'demo-upload-file'
+  }
   
+  // set endpoint target required parameters
+
+  var params  = {
+      file  : formfiles.files[i],
+      name  : form['name'].value||formfiles.files[i].name,
+      // other : ...
+    }
+    
+  // api call style models : style zero (no async)
+  
+  await api.transfer(
+      [action, params],
+      progress=> { console.log("progress:", progress) },
+      result=> { console.log("results:", result) }
+  )
+  
+  
+  // api call style models : style one (partial sync)
+  const result = await api.transfer( [action, params], progress => { console.log("progress:", progress) }).result()
+  console.log("result", result )
+  
+  
+  // api call style models : style two (destructured partial async)
+  const { result } = await api.transfer( [action, params], progress => { console.log("progress:", progress ) })
+  console.log("result", await result() )
+  
+
+  // api call style models : style three (full destructured async )
+  const { progress, result } = api.transfer( [action, params] )
+  progress( progress => console.log("progress:", progress) )
+  console.log("result:", await result() )
+  
+  
+  // api call style models : style four (procedural async)
+  const transit  = api.transfer( [action, params] )
+  const progress = transit.progress( $ => console.log("progress:", $) )
+  const result  = await transit.result()
+  console.log("result:", result)
+  
+
+  // api call style models : shorted (transmitted wait direct result without progress):
+  const result = await api.transmitted( [action, params] )
+  console.log("result", result )
+  ```
 
