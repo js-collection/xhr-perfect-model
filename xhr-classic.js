@@ -1,3 +1,19 @@
+//:
+//: THIS IS A FUNCTIONAL MODEL FOR A WALKIE TALKIE RESTFUL API SYSTEM
+//: It's ready to use if you have a standard rest api
+//:
+//: some reference:
+//: https://www.restapitutorial.com/lessons/httpmethods.html
+//:
+//: Some good roles for a good unversal response from server:
+//: 1) in header set, minimum, this status codes: (0,1,2,3,4,400,401,402,403,404,500,501,508)
+//: 2) my server response {
+//: 	status:  true, 				// false if fail, true if computable! not code here!
+//: 	message: "we recived good", // false if nothing, message for success/error!
+//: 	payload: [data,data,data] 	// false if empty, array of items with datas
+//:   }
+//:
+
 
 const baseroute = 'http://yoursitewithapi:YOURPORTNUMBER/'
 
@@ -5,16 +21,18 @@ const api = new class API {
 
     transfer (profile,backprogress,backdata) {
 
-		if (!profile[0]||!profile[1]) {
+		if ( !profile[0] || !profile[1] || profile[1].file && profile[1].file.count>0 ) {
 
-			console.error("API CONNECTOR WRONG - NO CORRECT PROFILE SETTED");
+			request.status   = 501
+			response.status  = false
+			response.payload = false
+			response.message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile[0] || !profile[1] ? "NO CORRECT PROFILE SETTED":"ONLY ONE FILE FOR CONNECTION" )
 
-		} else if( profile[1].file && profile[1].file.count>0 ) {
+			this.debugs(request,response)
+			resolve(response.message)
 
-			console.error("API CONNECTOR WRONG - ONLY ONE FILE FOR CONNECTION")
 
 		} else {
-
 
 			var request = new XMLHttpRequest(),
 				connect = this.connectors(profile[0].action),
@@ -25,7 +43,7 @@ const api = new class API {
 
 			// set xhr debug level
 
-			request.debuglevel = 0
+			request.debuglevel = 1
 
 			// open xhr file/params trasmition
 
@@ -46,7 +64,6 @@ const api = new class API {
 
 			}
 
-
 			// manage xhr status
 
 			request.upload.addEventListener( 'progress', stream => {
@@ -54,8 +71,8 @@ const api = new class API {
 				if (stream.lengthComputable) {
 
 					let totalbyte 	= ( stream.totalSize||stream.total ),
-						loadedbyte  = ( stream.position||stream.loaded ),
-						percentage  = ( loadedbyte/totalbyte * 100 ).toFixed(1);
+					    loadedbyte  = ( stream.position||stream.loaded ),
+					    percentage  = ( loadedbyte/totalbyte * 100 ).toFixed(1);
 
 					backprogress({
 						totalbytes  : totalbyte,
@@ -162,23 +179,31 @@ const api = new class API {
 
 
 	connectors ( action ) {
-
+	
 		this.route 	= baseroute
-		this.method = undefined
+		this.method 	= undefined
 		this.mode 	= undefined
-
-		return this.connectors_ENDPOINT_SECTOR(action) /* || other connectors */ ? this : console.error("API CONNECTOR WRONG - NO ENDPOINT FINDED")
+	
+		return this.connectors_MYAPISECTOR(action) /* || other connector || other connector ... */ ? this : (()=>{
+	
+			request.status   = 500
+			response.status  = false
+			response.payload = false
+			response.message = "CLIENT API ERROR: CONNECTOR WRONG ~ NO ENDPOINT SECTOR FINDED"
+			this.debug(request,response)
+	
+		})()
 
 	}
 
 
-	connectors_ENDPOINT_SECTOR(action) {
+	connectors_MYAPISECTOR(action) {
 
 		switch (action) {
 
 
-			case 'ENDPOINT_SECTOR-ENDPOINT_API_PAGE':
-				this.route += 'ENDPOINT_SECTOR/ENDPOINT_API_PAGE'
+			case 'MYAPISECTOR-ENDPOINTNAME':
+				this.route += 'MYAPIPATH/ENDPOINTPAGE'
 				this.method = 'post'
 				this.mode = true
 			break
