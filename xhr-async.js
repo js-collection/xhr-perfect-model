@@ -18,6 +18,8 @@ const baseroute = 'http://yoursitewithapi:YOURPORTNUMBER/'
 
 const api = new class API {
 
+    transmitted = (profile) => this.transfer(profile).results()
+
     transfer ( profile, backprogress, backresult ) {
 
 		this.process = new Promise( resolve => {
