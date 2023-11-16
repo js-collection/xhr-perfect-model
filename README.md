@@ -6,7 +6,7 @@
 
 ---
 
-  - 💎 Latest [classic type]() / [async type]()
+  - 💎 Latest [classic/async type]()
   - 💾 Stable [relesed list](https://github.com/js-node-collection/xhr-perfect-model/releases)
   - ⚙️ Rolling [developers branch](https://github.com/js-collection/xhr-perfect-model/tree/development)
 
