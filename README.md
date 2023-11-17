@@ -1,5 +1,7 @@
 # xhr-perfect-model
 
+<img src="./banner.jsperfectxhr.webp" alt="javascript xhr open source api system">
+
 ## 📃 Info:
 
 **An asset model for make the smallest xhr walkie talkie client system.**<br>
