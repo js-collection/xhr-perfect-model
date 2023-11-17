@@ -39,6 +39,7 @@ You can use all you want into the form, or not use the form with a complete new 
 - Load class into you web page, like this:
   ```js
   <script src=".../xhr-classic.js"></script>
+  //or xhr-async.js or rename it
   ```
 
 - make a form with you data or a function for you API, like:
