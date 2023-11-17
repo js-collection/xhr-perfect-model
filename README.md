@@ -16,6 +16,8 @@
 ## *️⃣ What it do:
 This is a simplest, but complete, model to make client side walkie talkie ( it's a method to send and receiving information to/from server ) restful system.
 <br><br>
+<img src="./banner.modernrestsys.webp" alt="modern restful system">
+<br><br>
 So, in shor, you collect the data from form or function, put it in the class, the class "transfer" via a presetted xhr protocol the data and waiting a response from it. When the response reached it's served to you. In the same time, if you have a progression ( an exemple a big json or files ) you can get it easly ( it's all just presetted ;) ). That's the piece of cake.
 <br><br>
 You can use all you want into the form, or not use the form with a complete new custom function, it's not important! This asset make a simple class as  preset for a web restful data (text, file or text json) transferts... not else.
