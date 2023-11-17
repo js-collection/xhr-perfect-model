@@ -12,4 +12,4 @@
 
 ---
 
-*For all information and licence roles read the tools readme in relative relese
+*For all information to law read this [licence](https://github.com/js-collection/xhr-perfect-model/blob/main/LICENSE.md) or the roles into relative relesed version
