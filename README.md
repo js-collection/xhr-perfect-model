@@ -6,13 +6,18 @@
 
 ## 📃 Info:
 
-**An asset model for make the smallest xhr walkie talkie client system.**<br>
-<sub>This project is built by Alberto Marangelo (@berto-dev) [¹](https://berto.dev) [²](https://github.com/berto-dev) for Deveet Technologies [¹](https://deveet.com) [²](https://github.com/Deveet-Technologies)</sub><br>
-<sup><sub><i>This is open code in MIT licence. If you use in your blog it's a good idea to include "taken from original GITPAGE of the AUTHORSLINK"</i></sub></sup>
+#### WHAT IS IT?
+An asset model for make the smallest xhr walkie talkie client system. <br>
+
+#### WHY CHOOSE IT?
+Unlike some other competitors, this system does not have compilers, special protocols and a framework but a simple micro-library. Its strength is in its simplicity... It is a simple "walkie-talkie" method (so it collects the data of a form and packages it for sending to the server and waits for or tracks a response) created in simple vanilla Js and web APIs. So simple that its router itself is a suggestion, a preset to be hard-coded to expand as you wish. The advantage becomes your freedom... you decide everything as long as it concerns web formData, text and json. This system, not being a framework, does not affect server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
+
+#### WHO DID THAT?
+This is an open project built by Alberto Marangelo (@berto-dev) [¹](https://berto.dev) [²](https://github.com/berto-dev) for Deveet Technologies [¹](https://deveet.com) [²](https://github.com/Deveet-Technologies)<br>
+<sup>If you use in your blog it's a good idea to include <i>"taken from original GITPAGE of the AUTHORSLINK"</i></sup>
 <br><br>
 
 ## 🆘 Before flight:
-- **Why this?** <br>Unlike some other competitors, this system does not have compilers, special protocols and a framework but a simple micro-library. Its strength is in its simplicity... It is a simple "walkie-talkie" method (so it collects the data of a form and packages it for sending to the server and waits for or tracks a response) created in simple vanilla Js and web APIs. So simple that its router itself is a suggestion, a preset to be hard-coded to expand as you wish. The advantage becomes your freedom... you decide everything as long as it concerns web formData, text and json. This system, not being a framework, does not affect server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)
 - **Remember**: This is the client side script, it's not the server side!<br>
 - **Remember** to change your api base root the class in place of the [`http://yoursitewithapi:YOURPORTNUMBER/`](https://github.com/js-collection/xhr-perfect-model/blob/development/xhr-classic.js#L2) placeholder.<br>
 - **Remember** to register your api into the class in place of the [`connectors_ENDPOINT_SECTOR`](https://github.com/js-collection/xhr-perfect-model/blob/development/xhr-classic.js#L175) placeholder. You can registre infinite api sectors.<br>
