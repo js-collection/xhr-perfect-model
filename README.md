@@ -1,3 +1,5 @@
+[<sub>![](https://img.shields.io/badge/❮❮_BACK_TO_COLLECTION_HOMEPAGE-lavender.svg)</sub>](https://github.com/js-collection)
+---
 # xhr-perfect-model
 
 <img src="./.depot/banner.jsperfectxhr.webp" alt="javascript xhr open source api system">
