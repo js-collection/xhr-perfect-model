@@ -225,7 +225,7 @@ const api = new class API {
 		this.method = undefined
 		this.mode 	= undefined
 
-		return this.connectors_MYAPISECTOR(action) /* || other connectors */ ? this : (()=>{
+		return this.connector_MY_API_SECTOR_ROUTES(action) /* || other connector || other connector ... */ ? this : (()=>{
 
 			request.status    = 500
 			response.status   = false
@@ -238,12 +238,12 @@ const api = new class API {
 	}
 
 
-	connectors_MYAPISECTOR(action) {
+	connector_MY_API_SECTOR_ROUTES(action) {
 
 		switch (action) {
 
 
-			case 'MYAPISECTOR-ENDPOINTNAME':
+			case 'MY_API_SECTOR_ROUTES-ACTION_OR_ENDPOINT_NAME':
 				this.route += 'MYAPIPATH/ENDPOINTPAGE'
 				this.method = 'post'
 				this.mode = true

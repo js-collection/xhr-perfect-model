@@ -103,24 +103,6 @@ const api = new class API {
 
 				} else {
 
-					switch (request.status) {
-
-						case 0:   request.warning = 'Request URL not exist / corrupted response';  break;
-						case 1:   request.warning = 'Request not initialized'; break;
-						case 2:   request.warning = 'Request not recived'; break;
-						case 3:   request.warning = 'Request not processed'; break;
-						case 4:   request.warning = 'Request not finished / Response lost'; break;
-						case 400: request.warning = 'Bad Request / Action wrong'; break;
-						case 401: request.warning = 'Not Authorized Request'; break;
-						case 403: request.warning = 'Lost or blocked Request'; break;
-						case 404: request.warning = 'File/Page not found'; break;
-						case 500: request.warning = 'Inner server error'; break;
-						case 501: request.warning = 'Bad API requesting'; break;
-						case 508: request.warning = 'Server Resouces Overloaded'; break;
-						default: 'Unknown error ~ status: "'+request.status+'" / message: "'+request.message+'"'; break;
-
-					}
-
 					this.debug( request, result )
 
 					backdata( result )
@@ -136,6 +118,24 @@ const api = new class API {
 
 
 	debug (request,result) {
+
+		switch (request.status) {
+
+			case 0:   request.warning = 'Request URL not exist / corrupted response';  break;
+			case 1:   request.warning = 'Request not initialized'; break;
+			case 2:   request.warning = 'Request not recived'; break;
+			case 3:   request.warning = 'Request not processed'; break;
+			case 4:   request.warning = 'Request not finished / Response lost'; break;
+			case 400: request.warning = 'Bad Request / Action wrong'; break;
+			case 401: request.warning = 'Not Authorized Request'; break;
+			case 403: request.warning = 'Lost or blocked Request'; break;
+			case 404: request.warning = 'File/Page not found'; break;
+			case 500: request.warning = 'Inner server error'; break;
+			case 501: request.warning = 'Bad API requesting'; break;
+			case 508: request.warning = 'Server Resouces Overloaded'; break;
+			default: 'Unknown error ~ status: "'+request.status+'" / message: "'+request.message+'"'; break;
+
+		}
 
 		switch (request.debuglevel) {
 
@@ -202,7 +202,7 @@ const api = new class API {
 		switch (action) {
 
 
-			case 'MY_API_SECTOR_ROUTES-ENDPOINTNAME':
+			case 'MY_API_SECTOR_ROUTES-ACTION_OR_ENDPOINT_NAME':
 				this.route += 'MYAPIPATH/ENDPOINTPAGE'
 				this.method = 'post'
 				this.mode = true
