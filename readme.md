@@ -2,7 +2,9 @@
 ---
 # xhr-perfect-model
 
-<img src="./.depot/banner.jsperfectxhr.webp" alt="javascript xhr open source api system">
+<a href="https://github.com/sponsors/js-collection">
+  <img src="./.depot/banner.jsperfectxhr.webp" alt="javascript xhr open source api system">
+</a>
 
 <table>
   <tr>
