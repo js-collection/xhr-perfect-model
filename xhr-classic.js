@@ -180,9 +180,9 @@ const api = new class API {
 
 	connectors ( action ) {
 	
-		this.route 	= baseroute
-		this.method 	= undefined
-		this.mode 	= undefined
+		this.route  = baseroute
+		this.method = undefined
+		this.mode   = undefined
 	
 		return this.connectors_MYAPISECTOR(action) /* || other connector || other connector ... */ ? this : (()=>{
 	
