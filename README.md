@@ -4,6 +4,17 @@
 
 <img src="./.depot/banner.jsperfectxhr.webp" alt="javascript xhr open source api system">
 
+<table>
+  <tr>
+    <td width="999" align="center"> <a href="https://github.com/js-collection/xhr-perfect-model/releases"> 💾 Stable relesed list </a> </td>
+    <td width="999" align="center"> <a href="https://github.com/js-collection/xhr-perfect-model/tree/released"> 💎 Latest release </a> </td>
+    <td width="999" align="center"> <a href="https://github.com/js-collection/xhr-perfect-model/tree/development"> ⚙️ Unstable / Devs </a> </td>
+    <td width="999" align="center"> <a href="./licence.md"> ⚖️ Licence roles </a> </td>
+  </tr>
+</table>
+
+---
+
 ## 📃 Info:
 
 #### WHAT IS IT?
