@@ -29,7 +29,6 @@ const api = new class API {
 			response.message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile[0] || !profile[1] ? "NO CORRECT PROFILE SETTED":"ONLY ONE FILE FOR CONNECTION" )
 
 			this.debugs(request,response)
-			resolve(response.message)
 
 
 		} else {
@@ -135,6 +134,7 @@ const api = new class API {
 
 	}
 
+
 	debug (request,result) {
 
 		switch (request.debuglevel) {
@@ -184,7 +184,7 @@ const api = new class API {
 		this.method = undefined
 		this.mode   = undefined
 	
-		return this.connectors_MYAPISECTOR(action) /* || other connector || other connector ... */ ? this : (()=>{
+		return this.connector_MY_API_SECTOR_ROUTES(action) /* || other connector || other connector ... */ ? this : (()=>{
 	
 			request.status   = 500
 			response.status  = false
@@ -197,12 +197,12 @@ const api = new class API {
 	}
 
 
-	connectors_MYAPISECTOR(action) {
+	connector_MY_API_SECTOR_ROUTES(action) {
 
 		switch (action) {
 
 
-			case 'MYAPISECTOR-ENDPOINTNAME':
+			case 'MY_API_SECTOR_ROUTES-ENDPOINTNAME':
 				this.route += 'MYAPIPATH/ENDPOINTPAGE'
 				this.method = 'post'
 				this.mode = true
