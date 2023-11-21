@@ -49,7 +49,7 @@ You can use all you want into the form, or not use the form with a complete new 
 ### Requirements: 
 
 - an endpoint for a restful api with text/json response ([read here](https://github.com/js-collection/xhr-perfect-model/blob/9fff6394fc89119693d347fd4bc3c5f50b7c4663/xhr-classic.js#L8C1-L15C4))
-- suggested a good server walkie talkie system (like pre [comingsoon...]())
+- suggested a good server walkie talkie system (like [comingsoon...]())
 - in node / express you sure need to able [express.text({...})](https://expressjs.com/en/api.html#:~:text=express.text(%5Boptions%5D)) (if you buffering the trasmission) or [json+urlencoded](https://stackoverflow.com/questions/23259168/what-are-express-json-and-express-urlencoded) (not tested)
 
 
