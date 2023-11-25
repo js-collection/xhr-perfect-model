@@ -80,7 +80,7 @@ You can use all you want into the form, or not use the form with a complete new 
   You can make a config inside the xhr-async|linear.js:
   ```js
   const api = new class API {
-    // other of the class, yout don't need to touch it
+    // other parts of the class, you don't need to touch it
   }
 
   api.configuration({
@@ -88,12 +88,12 @@ You can use all you want into the form, or not use the form with a complete new 
     baseroute: 'http://myapiurl:myport',    // it's you base api url
     debugger: 2,                            // from 0 (no logs) to 3 (full logs)
 
-    sectors: [{                             // it's the lists of your sections of api type (v1,v2,CRUD,FILESYS, ecc)
+    sectors: [{                             // it's the lists of your sections and endpoints
 
-      name: 'mySecotorSplitter',            // the nickname (a fake name for target it) of splitter (ex V1-GLOBAL, V1-CRUD, V1-FS, other)
-      path: '/my/api/real/sector/path/',    // it's the real path (ex /v1/crud-operations/apis/)
+      name: 'mySectorName',                 // the sector nickname (a fake name for target it, like V1-GLOBAL, V1-CRUD, V1-FS, other)
+      path: '/my/api/real/sector/path/',    // the real path of api (ex /v1/crud-operations/apis/)
       actions: [{
-        endpoint: 'myRealEndpointFile',     // this is the endpoint (ex removeFile.js, or removedirectory.php)
+        endpoint: 'myRealEndpointFile',     // the endpoint (ex removeFile.js, logIn.php, ecc)
         method: 'POST',                     // classic methods (POST|PUT|GET|PATCH|DELETE)
         mode: 'async'                       // async or everything, we like "linear" but its in anycase a sync
       },{

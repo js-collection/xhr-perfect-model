@@ -305,7 +305,7 @@ api.configuration({
 
 	// sectors: [{
 
-	// 	name: 'mySecotorSplitter',
+	// 	name: 'mySectorName',
 	// 	path: '/my/api/real/sector/path/',
 	// 	actions: [{
 	// 		endpoint: 'myRealEndpointFile',
