@@ -85,7 +85,7 @@ You can use all you want into the form, or not use the form with a complete new 
 
   api.configuration({
 
-    baseroute: 'http://myapiurl:myport',    // it's you base api url
+    baseroute: 'http://myapiurl:myport',    // it's your base api url
     debugger: 2,                            // from 0 (no logs) to 3 (full logs)
 
     sectors: [{                             // it's the lists of your sections and endpoints
