@@ -327,4 +327,5 @@ const api = new class API {
 // 	},/*your other api sectors*/]
 //
 // })
+
 export default api; typeof window === 'undefined' ? null : window.api = api
