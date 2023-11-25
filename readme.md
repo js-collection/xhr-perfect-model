@@ -133,31 +133,22 @@ You can use all you want into the form, or not use the form with a complete new 
     <html>
 
       <form id="test">
-          <!--THIS IS A STUPID MODEL, MAKE YOU A CUSTOM DATA-->
+          <!--THIS IS A STUPID MODEL, YOU CAN USE ANYTHING OF WEB FORM-->
           <input multiple="false" name="collector" type="file">
-          <input name="test" type="text" placeholder="write every you wont ;)">
           <button name="tester">TEST DATA</button>
       </form>
 
       <script>
-        window.onload = () => {
-          if (document.readyState == 'complete') {
+          // NB: make sure your page is ready to use
     
-            //test api and system
-            function API_TEST() {
-    
-              let form = document.forms[ 'test' ],
-                  formfiles = form['collector'],
-                  testnow = form[ 'tester' ]
-    
-              testnow.onclick = () => {
-                  //do operations and call api...
-              }
-    
+          let form = document.forms[ 'test' ],
+              formfiles = form['collector'],
+              testnow = form[ 'tester' ]
+
+          testnow.onclick = () => {
+              //execture linear or async model...
           }
-    
-        }
-      }
+       
       </script>
 
     </html>
