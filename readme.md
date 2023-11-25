@@ -58,12 +58,12 @@ You can use all you want into the form, or not use the form with a complete new 
 ### Explain of codes:
 
 <table>
-<tr><td>`class API`<td><td width="9999">it's the container of all codes</td></tr>
-<tr><td>`configuration`<td><td>i t's the function for take the js object and share it into the class</td></tr>
-<tr><td>`router`<td><td>i t's the function for loop the object in the configuration, take the correct api sector and find the correct endpoint</td></tr>
-<tr><td>`transfer`<td><td>i t's the function, with all data, that make the xhr connection for your api's</td></tr>
-<tr><td>`transmitted`<td><td>i t's silent waiter mode of transfer, return only the results when transfer has finished</td></tr>
-<tr><td>`log`<td><td>i t's a method for print a beauty little log of you api call</td></tr>
+<tr><td>class API</td><td width="9999">it's the container of all codes</td></tr>
+<tr><td>configuration</td><td>i t's the function for take the js object and share it into the class</td></tr>
+<tr><td>router</td><td>i t's the function for loop the object in the configuration, take the correct api sector and find the correct endpoint</td></tr>
+<tr><td>transfer</td><td>i t's the function, with all data, that make the xhr connection for your api's</td></tr>
+<tr><td>transmitted</td><td>i t's silent waiter mode of transfer, return only the results when transfer has finished</td></tr>
+<tr><td>log</td><td>i t's a method for print a beauty little log of you api call</td></tr>
 </table>
 
 ### Usage:
