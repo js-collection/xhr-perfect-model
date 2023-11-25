@@ -1,0 +1,26 @@
+{
+    "name": "xhr-perfect-model",
+    "version": "2.0",
+    "description": "The smallest asset to build the smallest xhr walkie-talkie RESTful API system",
+    "exports": {
+        "./xhr-async.js": {
+            "import": "./xhr-async.js",
+            "require": "./xhr-async.js"
+        },
+        "./xhr-linear.js": {
+            "import": "./xhr-linear.js",
+            "require": "./xhr-linear.js"
+        }
+    },
+    "keywords": [
+        "xhr",
+        "api",
+        "restful"
+    ],
+    "author": "Alberto Marangelo berto.dev",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/js-collection/xhr-perfect-model"
+    }
+}

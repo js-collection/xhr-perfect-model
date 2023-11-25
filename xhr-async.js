@@ -319,3 +319,5 @@ api.configuration({
 
 	// },/*your other api sectors*/]
 })
+
+export default api; typeof window === 'undefined' ? null : window.api = api

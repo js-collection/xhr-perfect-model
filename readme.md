@@ -72,8 +72,15 @@ You can use all you want into the form, or not use the form with a complete new 
 
 - Load class into you web page, like this:
   ```js
-  <script src=".../xhr-linear.js"></script>
-  //or xhr-async.js or rename it
+  <script src="xhr-linear.js"></script> //or xhr-async.js or rename it
+  ```
+  Experimental feature: (not now...)
+  ```js
+  window.api //get it via global exporting
+  ```
+  ```js
+  import { api } from 'xhr-perfect-model/xhr-linear.js';
+  api ... //get it like npm import js file
   ```
 
 - Configuration of your api roots:<br>
