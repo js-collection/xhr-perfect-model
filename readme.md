@@ -75,9 +75,8 @@ You can use all you want into the form, or not use the form with a complete new 
   <script src=".../xhr-linear.js"></script>
   //or xhr-async.js or rename it
   ```
-  <br>
 
-- Configuration of your api roots:<br><br>
+- Configuration of your api roots:<br>
   You can make a config inside the xhr-async|linear.js:
   ```js
   const api = new class API {
@@ -89,7 +88,7 @@ You can use all you want into the form, or not use the form with a complete new 
     baseroute: 'http://myapiurl:myport',    // it's you base api url
     debugger: 2,                            // from 0 (no logs) to 3 (full logs)
 
-    sectors: [{                             // it's the lists of you sections of api type (v1,v2,CRUD,FILESYS, ecc)
+    sectors: [{                             // it's the lists of your sections of api type (v1,v2,CRUD,FILESYS, ecc)
 
       name: 'mySecotorSplitter',            // the nickname (a fake name for target it) of splitter (ex V1-GLOBAL, V1-CRUD, V1-FS, other)
       path: '/my/api/real/sector/path/',    // it's the real path (ex /v1/crud-operations/apis/)
@@ -108,7 +107,6 @@ You can use all you want into the form, or not use the form with a complete new 
   })
   ```
   or, if you want, you can put the config outside and import it like this:
-
   ```js
   // into you xhr-config.js
   export {
@@ -129,7 +127,6 @@ You can use all you want into the form, or not use the form with a complete new 
   import * as configuration from './xhr-config.js'
   api.configuration( configuration )
   ```
-  <br>
 
 - Make a form with you data or a function for you API, like:
   ```html
@@ -194,7 +191,7 @@ You can use all you want into the form, or not use the form with a complete new 
   How you can easy see, after setted a target in profile and the correct params of your api endpoint, you have 2 callback:
   - progress return the object with progression data sended (an exemple, the bytes and percentage of file sending) and it is called for many times how steps needed for completation (or failing)
   - results is the final data resulted of operations... the payloads, the restful json object of end operations
-   <br><br>
+   <br>
 
 - _XHR ASYNC:_ in an async function or asset, use below codes to call the class for talk with your api walkie talkie like this:
 
