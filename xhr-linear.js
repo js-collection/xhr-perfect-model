@@ -55,6 +55,13 @@ const api = new class API {
 
 	transfer (profile,backprogress,backdata) {
 
+		if ( !this.config ) {
+
+			this.log({},{},501,"CLIENT API ERROR: NO CONFIG FOUND")
+			return
+
+		}
+
 		if ( !profile.target || !profile.params || profile.profile.params.file && profile.profile.params.file.count>0 ) {
 
 
@@ -252,29 +259,29 @@ const api = new class API {
 
 }
 
-api.configuration({
-
-	// THIS IS A MODEL, SET YOUR CONFIG HERE OR IN EXTERNAL FILE
-
-	// baseroute: 'http://myapiurl:myport',
-	// debugger: 2, //from 0 to 3
-
-	// sectors: [{
-
-	// 	name: 'mySectorName',
-	// 	path: '/my/api/real/sector/path/',
-	// 	actions: [{
-	// 		endpoint: 'myRealEndpointFile',
-	// 		method: 'POST',
-	// 		mode: 'async'
-	// 	},{
-	// 		endpoint: 'myOtherRealEndpointFileSync',
-	// 		method: 'POST',
-	// 		mode: 'linear'
-	// 	},/*your other api endpoints*/]
-
-	// },/*your other api sectors*/]
-
-})
+// api.configuration({
+//
+// 	// THIS IS A MODEL, SET YOUR CONFIG HERE OR IN EXTERNAL FILE
+//
+// 	baseroute: 'http://myapiurl:myport',
+// 	debugger: 2, //from 0 to 3
+//
+// 	sectors: [{
+//
+// 		name: 'mySectorName',
+// 		path: '/my/api/real/sector/path/',
+// 		actions: [{
+// 			endpoint: 'myRealEndpointFile',
+// 			method: 'POST',
+// 			mode: 'async'
+// 		},{
+// 			endpoint: 'myOtherRealEndpointFileSync',
+// 			method: 'POST',
+// 			mode: 'linear'
+// 		},/*your other api endpoints*/]
+//
+// 	},/*your other api sectors*/]
+//
+// })
 
 export default api; typeof window === 'undefined' ? null : window.api = api

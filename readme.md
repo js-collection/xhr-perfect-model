@@ -86,9 +86,9 @@ You can use all you want into the form, or not use the form with a complete new 
 - Configuration of your api roots:<br>
   You can make a config inside the xhr-async|linear.js:
   ```js
-  const api = new class API {
-    // other parts of the class, you don't need to touch it
-  }
+  // const api = new class API {
+  //    and other parts of the class, you don't need to touch it
+  // }
 
   api.configuration({
 
