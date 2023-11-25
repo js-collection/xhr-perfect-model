@@ -55,7 +55,7 @@ const api = new class API {
 
 	transfer ( profile, backprogress, backresult ) {
 
-		if ( !this.config ) {
+		if ( !this.config || Object.keys(this.config).length === 0 ) {
 
 			this.log({},{},501,"CLIENT API ERROR: NO CONFIG FOUND")
 			return
