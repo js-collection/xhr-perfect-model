@@ -59,11 +59,11 @@ You can use all you want into the form, or not use the form with a complete new 
 
 <table>
 <tr><td>class API</td><td width="9999">it's the container of all codes</td></tr>
-<tr><td>configuration</td><td>it's the function for take the js object and share it into the class</td></tr>
+<tr><td>configuration</td><td>it's the function for take the js configuration object and share it into the class</td></tr>
 <tr><td>router</td><td>it's the function for loop the object in the configuration, it move into the api sector and it find the correct endpoint</td></tr>
 <tr><td>transfer</td><td>it's the function, with all data, that make the xhr connection for your api's</td></tr>
-<tr><td>transmitted</td><td>it's silent waiter mode of transfer, return only the results when transfer has finished</td></tr>
-<tr><td>log</td><td>it's a method for print a beauty little log of you api call</td></tr>
+<tr><td>transmitted</td><td>it's silent mode of transfer, return only the results when transfer has finished</td></tr>
+<tr><td>log</td><td>it's a method for print a little ordered log of you api call</td></tr>
 </table>
 
 ### Usage:
