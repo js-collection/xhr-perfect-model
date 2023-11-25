@@ -37,6 +37,7 @@ This is an open project built by Alberto Marangelo (@berto-dev) [¹](https://ber
 - **SYNC ASYNC IN SHORT**: Sync and Async scripts are both the same but the first it's liniear and much simple to undestanding. Instead, the async offer more possibilities and rapidity to execution, but need to be encapsulated into an async function wrapper and inside have more complex syntax... For someone the async rappresent a [chaos and hard programming style](https://www.google.com/search?q=async+it%27s+too+complex&oq=async+it%27s+too+complex&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg80gEJMTA3MTdqMGo0qAIAsAIA&sourceid=chrome&ie=UTF-8#ip=1) but, again, for other one, Sync is not good because can encurred in a ["callback hell"](https://www.google.com/search?q=what%27s+callback+hell&oq=callback+hell+what&gs_lcrp=EgZjaHJvbWUqCAgBEAAYFhgeMgYIABBFGDkyCAgBEAAYFhge0gEIMzY3OGowajeoAgCwAgA&sourceid=chrome&ie=UTF-8)... it's a choose.<br><br>
 
 ## *️⃣ What it do:
+
 This is a simplest, but complete, model to make client side walkie talkie ( it's a method to send and receiving information to/from server ) restful system.
 <br><br>
 <img src="./.depot/banner.modernrestsys.webp" alt="modern restful system">
@@ -53,7 +54,7 @@ You can use all you want into the form, or not use the form with a complete new 
 - an endpoint for a restful api with text/json response ([read here](https://github.com/js-collection/xhr-perfect-model/blob/9fff6394fc89119693d347fd4bc3c5f50b7c4663/xhr-classic.js#L8C1-L15C4))
 - suggested a good server walkie talkie system (like [comingsoon...]())
 - in node / express you sure need to able [express.text({...})](https://expressjs.com/en/api.html#:~:text=express.text(%5Boptions%5D)) (if you buffering the trasmission) or [json+urlencoded](https://stackoverflow.com/questions/23259168/what-are-express-json-and-express-urlencoded) (not tested)
-
+<br><br>
 
 ### Explain of codes:
 
@@ -65,6 +66,7 @@ You can use all you want into the form, or not use the form with a complete new 
 <tr><td>transmitted</td><td>it's silent mode of transfer, return only the results when transfer has finished</td></tr>
 <tr><td>log</td><td>it's a method for print a little ordered log of you api call</td></tr>
 </table>
+<br><br>
 
 ### Usage:
 
