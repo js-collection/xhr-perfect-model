@@ -66,7 +66,7 @@ You can use all you want into the form, or not use the form with a complete new 
 <tr><td>transmitted</td><td>it's silent mode of transfer, return only the results when transfer has finished</td></tr>
 <tr><td>log</td><td>it's a method for print a little ordered log of you api call</td></tr>
 </table>
-<br><br>
+<br>
 
 ### Usage:
 
