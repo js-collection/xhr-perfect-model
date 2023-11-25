@@ -298,23 +298,24 @@ const api = new class API {
 
 api.configuration({
 
-	baseroute: 'http://myapiurl:myport',
-	debugger: 2, //from 0 to 3
+	// THIS IS A MODEL, SET YOUR CONFIG HERE OR IN EXTERNAL FILE
 
-	sectors: [{
+	// baseroute: 'http://myapiurl:myport',
+	// debugger: 2, //from 0 to 3
 
-		name: 'mySecotorSplitter',
-		path: '/my/api/real/sector/path/',
-		actions: [{
-			endpoint: 'myRealEndpointFile',
-			method: 'POST',
-			mode: 'async'
-		},{
-			endpoint: 'myRealEndpointFileSync',
-			method: 'POST',
-			mode: 'linear'
-		},/*your other api endpoints*/]
+	// sectors: [{
 
-	},/*your other api sectors*/]
+	// 	name: 'mySecotorSplitter',
+	// 	path: '/my/api/real/sector/path/',
+	// 	actions: [{
+	// 		endpoint: 'myRealEndpointFile',
+	// 		method: 'POST',
+	// 		mode: 'async'
+	// 	},{
+	// 		endpoint: 'myOtherRealEndpointFileSync',
+	// 		method: 'POST',
+	// 		mode: 'linear'
+	// 	},/*your other api endpoints*/]
 
+	// },/*your other api sectors*/]
 })

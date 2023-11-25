@@ -55,7 +55,7 @@ You can use all you want into the form, or not use the form with a complete new 
 - in node / express you sure need to able [express.text({...})](https://expressjs.com/en/api.html#:~:text=express.text(%5Boptions%5D)) (if you buffering the trasmission) or [json+urlencoded](https://stackoverflow.com/questions/23259168/what-are-express-json-and-express-urlencoded) (not tested)
 
 
-### explain the class:
+### Explain of codes:
 
 <table>
 <tr><td>`class API`<td><td width="9999">it's the container of all codes</td></tr>
@@ -73,8 +73,10 @@ You can use all you want into the form, or not use the form with a complete new 
   <script src=".../xhr-linear.js"></script>
   //or xhr-async.js or rename it
   ```
+  <br>
 
-- config you api inside the xhr-async|linear.js:
+- Configuration of your api roots:<br><br>
+  You can make a config inside the xhr-async|linear.js:
   ```js
   const api = new class API {
     // other of the class, yout don't need to touch it
@@ -103,8 +105,7 @@ You can use all you want into the form, or not use the form with a complete new 
 
   })
   ```
-
-  if you want you can put the config outside and import it like this:
+  or, if you want, you can put the config outside and import it like this:
 
   ```js
   // into you xhr-config.js
@@ -126,8 +127,9 @@ You can use all you want into the form, or not use the form with a complete new 
   import * as configuration from './xhr-config.js'
   api.configuration( configuration )
   ```
+  <br>
 
-- make a form with you data or a function for you API, like:
+- Make a form with you data or a function for you API, like:
   ```html
     <html>
 
@@ -161,8 +163,9 @@ You can use all you want into the form, or not use the form with a complete new 
 
     </html>
   ```
+  <br>
 
-- _XHR CLASSIC:_ use asset to call the class for talk with your api walkie talkie like this:
+- _XHR LINEAR (no async await):_ use asset to call the class for talk with your api walkie talkie like this:
 
   ```js
   // set call profile (it's a demo)
@@ -189,7 +192,8 @@ You can use all you want into the form, or not use the form with a complete new 
   How you can easy see, after setted a target in profile and the correct params of your api endpoint, you have 2 callback:
   - progress return the object with progression data sended (an exemple, the bytes and percentage of file sending) and it is called for many times how steps needed for completation (or failing)
   - results is the final data resulted of operations... the payloads, the restful json object of end operations
- 
+   <br><br>
+
 - _XHR ASYNC:_ in an async function or asset, use below codes to call the class for talk with your api walkie talkie like this:
 
   ```js
