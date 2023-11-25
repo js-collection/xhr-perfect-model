@@ -238,11 +238,11 @@ You can use all you want into the form, or not use the form with a complete new 
   const transit  = api.transfer( myCallProfile )
   const progress = transit.progress( values => console.log("progress:", values) )
   const results  = await transit.results()
-  console.log("result:", results)
+  console.log("results:", results)
   
 
   // api call style models : shorted (transmitted wait direct result without progress):
-  const result = await api.transmitted( myCallProfile )
-  console.log("result", result )
+  const results = await api.transmitted( myCallProfile )
+  console.log("results:", results )
   ```
 
