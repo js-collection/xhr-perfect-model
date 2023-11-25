@@ -146,7 +146,7 @@ You can use all you want into the form, or not use the form with a complete new 
               testnow = form[ 'tester' ]
 
           testnow.onclick = () => {
-              //exectute linear or async model...
+              //execute linear or async model...
           }
        
       </script>
