@@ -72,7 +72,7 @@ You can use all you want into the form, or not use the form with a complete new 
 
 - Load class into you web page, like this:
   ```js
-  <script src="xhr-linear.js"></script> //or xhr-async.js or rename it
+  script type="module" src="xhr-linear.js"></script> //or xhr-async.js or rename it
   ```
   Experimental feature: (not now...)
   ```js
