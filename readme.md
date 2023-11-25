@@ -111,8 +111,8 @@ You can use all you want into the form, or not use the form with a complete new 
   // into you xhr-config.js
   export {
 
-    baseroute: 'http://myapiurl:myport',    // it's you base api url
-    debugger: 2,                            // from 0 (no logs) to 3 (full logs)
+    baseroute: 'http://myapiurl:myport',
+    debugger: 2,
     sectors: [
       // { all other sectors data... }
     ]
