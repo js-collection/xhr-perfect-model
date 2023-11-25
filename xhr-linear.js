@@ -8,7 +8,7 @@
 //: Some good roles for a good unversal response from server:
 //: 1) in header set, minimum, this status codes: (0,1,2,3,4,400,401,402,403,404,500,501,508)
 //: 2) my server response {
-//: 	status:  true, 				// false if fail, true if computable! not code here!
+//: 	errors:  true, 				// false if fail, true if computable! not code here!
 //: 	message: "we recived good", // false if nothing, message for success/error!
 //: 	payload: [data,data,data] 	// false if empty, array of items with datas
 //:   }
@@ -183,7 +183,7 @@ const api = new class API {
 
 			request.debugger = 2
 			request.status   = status
-			response.status  = false
+			response.errors  = false
 			response.payload = false
 			response.message = message
 
