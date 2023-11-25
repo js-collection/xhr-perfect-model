@@ -13,75 +13,118 @@
 //: 	payload: [data,data,data] 	// false if empty, array of items with datas
 //:   }
 //:
+//: tips
+//: do you want external congifig? it's easy!! read the reference!
 
-const baseroute = 'http://yoursitewithapi:YOURPORTNUMBER/'
 
 const api = new class API {
 
-    transmitted = (profile) => this.transfer(profile).results()
+	configuration(object){
 
-    transfer ( profile, backprogress, backresult ) {
+		return this.config = object
+
+	}
+
+	router ( sectorName, targetName ) {
+
+		let sector,routed
+
+		for ( sector of this.config.sectors ) {
+
+			if ( sector.name == sectorName ) {
+
+				if ( routed = sector.actions.find( voice => voice.endpoint === targetName ) ) {
+
+					return {
+						url    : this.config.baseroute+(('/'+sector.path+'/'+routed.endpoint).replace(/\/\//g, "/")),
+						method : routed.method.toUpperCase(),
+						mode   : routed.mode
+					}
+
+				}
+
+			}
+
+		}
+
+		this.log({},{},500,"CLIENT API ERROR: WIRED ROUTE/API WRONG ~ NO SECTOR/ENDPOINT FINDED")
+
+		return false
+
+	}
+
+	transfer ( profile, backprogress, backresult ) {
 
 		this.process = new Promise( resolve => {
-			
-			if ( (!profile[0] || !profile[1]) || (profile[1].file && profile[1].file.count>0) ) {
 
 
-				request.status   = 501
-				response.status  = false
-				response.payload = false
-				response.message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile[0] || !profile[1] ? "NO CORRECT PROFILE SETTED":"ONLY ONE FILE FOR CONNECTION" )
+			if ( !profile.target || !profile.params || profile.params.file && profile.params.file.count>0 ) {
 
-				this.debugs(request,response)
-				resolve(response.message)
+
+				let message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile.target || !profile.params ? "NO CORRECT PROFILE SETTED" : "ONLY ONE FILE FOR CONNECTION" )
+
+				this.log({},{},501,message)
+
+				resolve(message)
 
 
 			} else {
 
 
 				var request = new XMLHttpRequest(),
-					connect = this.connectors(profile[0].action),
-					params  = profile[1]||false,
-					data = new FormData(),
-					query = ''
+					routed  = this.router( profile.sector, profile.target ),
+					data    = undefined,
+					query   = ''
 
 
-				// set xhr debug level
+				// set xhr extras
 
-				request.debuglevel = 1
+				
+				request.debugger = this.config.debugger||0
+				request.method 	 = routed.method.toUpperCase()||'no method finded!'
+				request.route 	 = routed.url||'no route finded!'
+				request.mode 	 = routed.mode||true
+
 
 				// open xhr file/params trasmition
 
-				if ( params.file ) {
 
-					data = params.file
+				if ( profile.params.file ) {
 
-					query = '?' + new URLSearchParams( (delete params.file, params) ).toString()
-					request.open( connect.method.toUpperCase(), connect.route+query, true)
+
+					data = profile.params.file
+
+					query = '?' + new URLSearchParams( (delete profile.params.file, profile.params) ).toString()
+					request.open( request.method, request.route+query, (request.mode=='async'?true:false) )
 					request.setRequestHeader('content-type','multipart/form-data')
+
 
 				} else {
 
-					data = JSON.stringify( params )
 
-					request.open( connect.method.toUpperCase(), connect.route, true)
+					data = JSON.stringify( profile.params )
+
+					request.open( request.method, request.route, (request.mode=='async'?true:false) )
 					request.setRequestHeader('content-type','application/json')
+
 
 				}
 
+
 				// manage xhr status
+
 
 				request.upload.addEventListener( 'progress', stream => {
 
-					if (stream.lengthComputable) {
+					if ( stream.lengthComputable ) {
 
 						let totalbyte 	= ( stream.totalSize||stream.total ),
 							loadedbyte  = ( stream.position||stream.loaded ),
 							percentage  = ( loadedbyte/totalbyte * 100 ).toFixed(1)
 
-						if ( typeof this.updateProgress == 'function' ) {
+						if ( typeof this.progression == 'function' ){
 
-							this.updateProgress({
+							this.progression({
 								totalbytes: totalbyte,
 								loadedbytes: loadedbyte,
 								percentage: percentage
@@ -101,7 +144,9 @@ const api = new class API {
 
 				})
 
+
 				request.onload = response => {
+
 
 					try {
 
@@ -113,53 +158,80 @@ const api = new class API {
 
 					}
 
+
 					if ( response && request.status === 200 && request.readyState === XMLHttpRequest.DONE ) {
 
+
 						if ( typeof backresult == 'function' ) {
-	
-							backresult( response )
-	
+
+							backresult ( response )
+
 						}
 
 						resolve ( response )
+
 
 					} else {
 
-						this.debugs( request, response )
 
-						if ( typeof backresult == 'function' ) {
+						this.log( request, response )
 
-							backresult( response )
+						if ( typeof backresult == 'function' ){
+
+							backresult ( response )
 
 						}
 
 						resolve ( response )
+
 
 					}
 
 
 				}
 
-				request.send(data)
+
+				request.send ( data )
+
 
 			}
 
 		})
 
 		this.progress = callback => {
-			this.updateProgress = callback
+
+			this.progression = callback
 			return this
+
 		}
 
-		this.result = () => {
+		this.results = () => {
+
 			return this.process
+
 		}
 
 		return this
 
 	}
+	
+	transmitted ( profile ) {
 
-	debugs ( request, response ) {
+		return this.transfer(profile).results()
+
+	}
+
+	log ( request, response, status, message ) {
+
+		if ( status && message ){
+
+			request.debugger = 2
+			request.status   = status
+			response.status  = false
+			response.payload = false
+			response.message = message
+
+		}
 
 		switch (request.status) {
 
@@ -179,7 +251,7 @@ const api = new class API {
 
 		}
 
-		switch (request.debuglevel) {
+		switch (request.debugger) {
 
 			case 1:
 
@@ -198,14 +270,14 @@ const api = new class API {
 			
 			break
 
-			default:
+			case 3:
 
 				console.groupCollapsed('API connection')
 				console.log(
 					'┈╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┈ ┈ ┈'+'\n'+
 					' ├ ACTION  : '+request.action+'\n'+
-					' ├ WIRED   : '+request.wire.route.replace(baseroute,'~/')+'\n'+
-					' ├ TYPE    : '+request.wire.method.toLowerCase()+'; '+request.mode=="async"?"async":"linear"+'; '+request.file?"multipart":"json"+';\n'+
+					' ├ WIRED   : '+request.route.replace(baseroute,'~/')+'\n'+
+					' ├ TYPE    : '+request.method.toLowerCase()+'; '+request.mode=="async"?"async":"linear"+'; '+request.file?"multipart":"json"+';\n'+
 					' ├ STATUS  : '+request.status+' ~ '+request.warning+'\n'+
 					' ├ MESSAGE : '+( response.message ? response.message : 'nothing else...' )+'\n'+
 					'┈╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌┈ ┈ ┈'+'\n'+
@@ -214,51 +286,35 @@ const api = new class API {
 				console.groupEnd()
 
 			break
+
+			default: null
+
 		
 		}
 
 	}
 
-	connectors ( action ) {
-
-		this.route 	= baseroute
-		this.method = undefined
-		this.mode 	= undefined
-
-		return this.connector_MY_API_SECTOR_ROUTES(action) /* || other connector || other connector ... */ ? this : (()=>{
-
-			request.status    = 500
-			response.status   = false
-			response.payload  = false
-			response.message  = "CLIENT API ERROR: CONNECTOR WRONG ~ NO ENDPOINT SECTOR FINDED"
-			this.debug(request,response)
-
-		})()
-
-	}
-
-
-	connector_MY_API_SECTOR_ROUTES(action) {
-
-		switch (action) {
-
-
-			case 'MY_API_SECTOR_ROUTES-ACTION_OR_ENDPOINT_NAME':
-				this.route += 'MYAPIPATH/ENDPOINTPAGE'
-				this.method = 'post'
-				this.mode = true
-			break
-
-			// Other...
-
-			/* - - - - - - - - - - - - - */
-
-			default: undefined;
-
-		}
-
-		return this.method!=undefined ? this : false
-
-	}
-
 }
+
+api.configuration({
+
+	baseroute: 'http://myapiurl:myport',
+	debugger: 2, //from 0 to 3
+
+	sectors: [{
+
+		name: 'mySecotorSplitter',
+		path: '/my/api/real/sector/path/',
+		actions: [{
+			endpoint: 'myRealEndpointFile',
+			method: 'POST',
+			mode: 'async'
+		},{
+			endpoint: 'myRealEndpointFileSync',
+			method: 'POST',
+			mode: 'linear'
+		},/*your other api endpoints*/]
+
+	},/*your other api sectors*/]
+
+})

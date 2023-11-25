@@ -20,10 +20,10 @@
 ## 📃 Info:
 
 #### WHAT IS IT?
-An asset model for make the smallest xhr walkie talkie client system. <br>
+This is an asset model for make the smallest xhr walkie-talkie system (so it collects the data of a form and packages it for sending to the server and waits for or tracks a response) into the client side pages. <br>
 
 #### WHY CHOOSE IT?
-Unlike some other competitors, this system does not have compilers, special protocols and a framework but a simple micro-library. Its strength is in its simplicity... It is a simple "walkie-talkie" method (so it collects the data of a form and packages it for sending to the server and waits for or tracks a response) created in simple vanilla Js and web APIs. So simple that its router itself is a suggestion, a preset to be hard-coded to expand as you wish. The advantage becomes your freedom... you decide everything as long as it concerns web formData, text and json. This system, not being a framework, does not affect server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
+Unlike some other competitors, this system does not have compilers, special protocols or framework but it's a simple micro-library. Its strength is in its simplicity... It is a simple "walkie-talkie" method created in simple vanilla Js and web APIs. Anyway, you can get the results of call, the progession of it and, from this version, we introduce a super little router (a simple loop of object like a json) for track your api's paths and enpoints. All of this system doesn't have affect on server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
 
 #### WHO DID THAT?
 This is an open project built by Alberto Marangelo (@berto-dev) [¹](https://berto.dev) [²](https://github.com/berto-dev) for Deveet Technologies [¹](https://deveet.com) [²](https://github.com/Deveet-Technologies)<br>
@@ -55,67 +55,132 @@ You can use all you want into the form, or not use the form with a complete new 
 - in node / express you sure need to able [express.text({...})](https://expressjs.com/en/api.html#:~:text=express.text(%5Boptions%5D)) (if you buffering the trasmission) or [json+urlencoded](https://stackoverflow.com/questions/23259168/what-are-express-json-and-express-urlencoded) (not tested)
 
 
+### explain the class:
+
+<table>
+<tr><td>`class API`<td><td width="9999">it's the container of all codes</td></tr>
+<tr><td>`configuration`<td><td>i t's the function for take the js object and share it into the class</td></tr>
+<tr><td>`router`<td><td>i t's the function for loop the object in the configuration, take the correct api sector and find the correct endpoint</td></tr>
+<tr><td>`transfer`<td><td>i t's the function, with all data, that make the xhr connection for your api's</td></tr>
+<tr><td>`transmitted`<td><td>i t's silent waiter mode of transfer, return only the results when transfer has finished</td></tr>
+<tr><td>`log`<td><td>i t's a method for print a beauty little log of you api call</td></tr>
+</table>
+
 ### Usage:
 
 - Load class into you web page, like this:
   ```js
-  <script src=".../xhr-classic.js"></script>
+  <script src=".../xhr-linear.js"></script>
   //or xhr-async.js or rename it
+  ```
+
+- config you api inside the xhr-async|linear.js:
+  ```js
+  const api = new class API {
+    // other of the class, yout don't need to touch it
+  }
+
+  api.configuration({
+
+    baseroute: 'http://myapiurl:myport',    // it's you base api url
+    debugger: 2,                            // from 0 (no logs) to 3 (full logs)
+
+    sectors: [{                             // it's the lists of you sections of api type (v1,v2,CRUD,FILESYS, ecc)
+
+      name: 'mySecotorSplitter',            // the nickname (a fake name for target it) of splitter (ex V1-GLOBAL, V1-CRUD, V1-FS, other)
+      path: '/my/api/real/sector/path/',    // it's the real path (ex /v1/crud-operations/apis/)
+      actions: [{
+        endpoint: 'myRealEndpointFile',     // this is the endpoint (ex removeFile.js, or removedirectory.php)
+        method: 'POST',                     // classic methods (POST|PUT|GET|PATCH|DELETE)
+        mode: 'async'                       // async or everything, we like "linear" but its in anycase a sync
+      },{
+        endpoint: 'myOtherRealEndpointFileSync',
+        method: 'POST',
+        mode: 'linear'
+      },/*your other api endpoints*/]
+
+    },/*your other api sectors*/]
+
+  })
+  ```
+
+  if you want you can put the config outside and import it like this:
+
+  ```js
+  // into you xhr-config.js
+  export {
+
+    baseroute: 'http://myapiurl:myport',    // it's you base api url
+    debugger: 2,                            // from 0 (no logs) to 3 (full logs)
+    sectors: [
+      // { all other sectors data... }
+    ]
+
+  }
+
+  // into class file
+  const api = new class API {
+    // other of the class, yout don't need to touch it
+  }
+
+  import * as configuration from './xhr-config.js'
+  api.configuration( configuration )
   ```
 
 - make a form with you data or a function for you API, like:
   ```html
     <html>
+
       <form id="test">
           <!--THIS IS A STUPID MODEL, MAKE YOU A CUSTOM DATA-->
           <input multiple="false" name="collector" type="file">
           <input name="test" type="text" placeholder="write every you wont ;)">
           <button name="tester">TEST DATA</button>
       </form>
+
+      <script>
+        window.onload = () => {
+          if (document.readyState == 'complete') {
+    
+            //test api and system
+            function API_TEST() {
+    
+              let form = document.forms[ 'test' ],
+                  formfiles = form['collector'],
+                  testnow = form[ 'tester' ]
+    
+              testnow.onclick = () => {
+                  //do operations and call api...
+              }
+    
+          }
+    
+        }
+      }
+      </script>
+
     </html>
-    <script>
-      window.onload = () => {
-        if (document.readyState == 'complete') {
-  
-          //test api and system
-          function API_TEST() {
-  
-            let form = document.forms[ 'test' ],
-                formfiles = form['collector'],
-                testnow = form[ 'tester' ]
-  
-             testnow.onclick = () => {
-                 //do operations and call api...
-             }
-  
-         }
-  
-       }
-     }
-    </script>
   ```
 
 - _XHR CLASSIC:_ use asset to call the class for talk with your api walkie talkie like this:
 
   ```js
-  // set endpoint target profile (it's a demo)
+  // set call profile (it's a demo)
 
-  var profile = { 
-      action :'demo-upload-file'
-  }
-  
-  // set endpoint target required parameters
-
-  var params  = {
+  const myCallProfile = { 
+    sector: 'files',
+    target: 'upload-file',
+    params: {
       file  : formfiles.files[i],
       name  : form['name'].value||formfiles.files[i].name,
       // other : ...
     }
+  }
   
   // api call model   
 
   api.transfer(
-    [profile,params],
+    myCallProfile,
     progress => console.log("in progress...", progress) ,
     results => console.log("data in back : ",results)
   )
@@ -130,52 +195,50 @@ You can use all you want into the form, or not use the form with a complete new 
   ```js
   // set endpoint target profile (it's a demo)
 
-  var profile = { 
-      action :'demo-upload-file'
-  }
-  
-  // set endpoint target required parameters
-
-  var params  = {
+  const myCallProfile = { 
+    sector: 'files',
+    target: 'upload-file',
+    params: {
       file  : formfiles.files[i],
       name  : form['name'].value||formfiles.files[i].name,
       // other : ...
     }
-    
-  // api call style models : style zero (no async)
-  
+  }
+
+  // style zero (no async ~ await is not required)
+  // for this approach we raccommend the linear script type
   await api.transfer(
-      [action, params],
+      myCallProfile,
       progress=> { console.log("progress:", progress) },
       result=> { console.log("results:", result) }
   )
   
-  
+
   // api call style models : style one (partial sync)
-  const result = await api.transfer( [action, params], progress => { console.log("progress:", progress) }).result()
-  console.log("result", result )
+  const results = await api.transfer( myCallProfile, progress => { console.log("progress:", progress) }).results()
+  console.log("results:", results )
   
   
   // api call style models : style two (destructured partial async)
-  const { result } = await api.transfer( [action, params], progress => { console.log("progress:", progress ) })
-  console.log("result", await result() )
+  const { results } = await api.transfer( myCallProfile, progress => { console.log("progress:", progress ) })
+  console.log("results:", await results() )
   
 
   // api call style models : style three (full destructured async )
-  const { progress, result } = api.transfer( [action, params] )
+  const { progress, results } = api.transfer( myCallProfile )
   progress( progress => console.log("progress:", progress) )
-  console.log("result:", await result() )
+  console.log("results:", await results() )
   
   
   // api call style models : style four (procedural async)
-  const transit  = api.transfer( [action, params] )
-  const progress = transit.progress( $ => console.log("progress:", $) )
-  const result  = await transit.result()
-  console.log("result:", result)
+  const transit  = api.transfer( myCallProfile )
+  const progress = transit.progress( values => console.log("progress:", values) )
+  const results  = await transit.results()
+  console.log("result:", results)
   
 
   // api call style models : shorted (transmitted wait direct result without progress):
-  const result = await api.transmitted( [action, params] )
+  const result = await api.transmitted( myCallProfile )
   console.log("result", result )
   ```
 

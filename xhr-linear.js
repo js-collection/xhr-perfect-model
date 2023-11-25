@@ -13,61 +13,107 @@
 //: 	payload: [data,data,data] 	// false if empty, array of items with datas
 //:   }
 //:
-
-
-const baseroute = 'http://yoursitewithapi:YOURPORTNUMBER/'
+//: tips
+//: do you want external congifig? it's easy!! read the reference!
 
 const api = new class API {
 
-    transfer (profile,backprogress,backdata) {
+	configuration(object){
 
-		if ( !profile[0] || !profile[1] || profile[1].file && profile[1].file.count>0 ) {
+		return this.config = object
 
-			request.status   = 501
-			response.status  = false
-			response.payload = false
-			response.message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile[0] || !profile[1] ? "NO CORRECT PROFILE SETTED":"ONLY ONE FILE FOR CONNECTION" )
+	}
 
-			this.debugs(request,response)
+	router ( sectorName, targetName ) {
+
+		let sector,routed
+
+		for ( sector of this.config.sectors ) {
+
+			if ( sector.name == sectorName ) {
+
+				if ( routed = sector.actions.find( voice => voice.endpoint === targetName ) ) {
+
+					return {
+						url    : this.config.baseroute+(('/'+sector.path+'/'+routed.endpoint).replace(/\/\//g, "/")),
+						method : routed.method.toUpperCase(),
+						mode   : routed.mode
+					}
+
+				}
+
+			}
+
+		}
+
+		this.log({},{},500,"CLIENT API ERROR: WIRED ROUTE/API WRONG ~ NO SECTOR/ENDPOINT FINDED")
+
+		return false
+
+	}
+
+
+	transfer (profile,backprogress,backdata) {
+
+		if ( !profile.target || !profile.params || profile.profile.params.file && profile.profile.params.file.count>0 ) {
+
+
+			let message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile.target || !profile.params ? "NO CORRECT PROFILE SETTED" : "ONLY ONE FILE FOR CONNECTION" )
+
+			this.log({},{},501,message)
+
+			resolve(message)
 
 
 		} else {
 
+
 			var request = new XMLHttpRequest(),
-				connect = this.connectors(profile[0].action),
-				params  = profile[1]||false,
-				data = new FormData(),
-				query = ''
+				routed  = this.router( profile.sector, profile.target ),
+				data    = undefined,
+				query   = ''
 
 
 			// set xhr debug level
 
-			request.debuglevel = 1
+
+			request.debugger = this.config.debugger||0
+			request.method 	 = routed.method.toUpperCase()||'no method finded!'
+			request.route 	 = routed.url||'no route finded!'
+			request.mode 	 = routed.mode||true
+
 
 			// open xhr file/params trasmition
 
-			if ( params.file ) {
 
-				data = params.file
+			if ( profile.params.file ) {
 
-				query = '?' + new URLSearchParams( (delete params.file, params) ).toString()
-				request.open( connect.method.toUpperCase(), connect.route+query, true)
+
+				data = profile.params.file
+
+				query = '?' + new URLSearchParams( (delete profile.params.file, profile.params) ).toString()
+				request.open( request.method, request.route+query, (request.mode=='async'?true:false) )
 				request.setRequestHeader('content-type','multipart/form-data')
+
 
 			} else {
 
-				data = JSON.stringify( params )
 
-				request.open( connect.method.toUpperCase(), connect.route, true)
+				data = JSON.stringify( profile.params )
+
+				request.open( request.method, request.route, (request.mode=='async'?true:false))
 				request.setRequestHeader('content-type','application/json')
+
 
 			}
 
+
 			// manage xhr status
+
 
 			request.upload.addEventListener( 'progress', stream => {
 
-				if (stream.lengthComputable) {
+				if ( stream.lengthComputable && typeof backprogress == 'function' ) {
 
 					let totalbyte 	= ( stream.totalSize||stream.total ),
 					    loadedbyte  = ( stream.position||stream.loaded ),
@@ -83,6 +129,7 @@ const api = new class API {
 
 			})
 
+
 			request.onload = result => {
 
 
@@ -97,27 +144,50 @@ const api = new class API {
 				}
 
 
-				if ( result && request.status === 200 && request.readyState === XMLHttpRequest.DONE ) {
+				if ( typeof backresult == 'function' ) {
 
-					backdata(result)
+					if ( result && request.status === 200 && request.readyState === XMLHttpRequest.DONE ) {
 
-				} else {
 
-					this.debug( request, result )
+						backdata(result)
 
-					backdata( result )
+
+					} else {
+
+
+						this.log( request, result )
+
+						backdata( result )
+
+
+					}
 
 				}
+
+
 			}
 
-			request.send(data)
+
+			request.send ( data )
+
 
 		}
+
 
 	}
 
 
-	debug (request,result) {
+	log ( request, response, status, message ) {
+
+		if ( status && message ){
+
+			request.debugger = 2
+			request.status   = status
+			response.status  = false
+			response.payload = false
+			response.message = message
+
+		}
 
 		switch (request.status) {
 
@@ -137,7 +207,7 @@ const api = new class API {
 
 		}
 
-		switch (request.debuglevel) {
+		switch (request.debugger) {
 
 			case 1:
 
@@ -156,7 +226,7 @@ const api = new class API {
 			
 			break
 
-			default:
+			case 3:
 
 				console.groupCollapsed('API connection')
 				console.log(
@@ -172,52 +242,35 @@ const api = new class API {
 				console.groupEnd()
 
 			break
+
+			default: null
 		
 		}
 
 	}
 
 
-	connectors ( action ) {
-	
-		this.route  = baseroute
-		this.method = undefined
-		this.mode   = undefined
-	
-		return this.connector_MY_API_SECTOR_ROUTES(action) /* || other connector || other connector ... */ ? this : (()=>{
-	
-			request.status   = 500
-			response.status  = false
-			response.payload = false
-			response.message = "CLIENT API ERROR: CONNECTOR WRONG ~ NO ENDPOINT SECTOR FINDED"
-			this.debug(request,response)
-	
-		})()
-
-	}
-
-
-	connector_MY_API_SECTOR_ROUTES(action) {
-
-		switch (action) {
-
-
-			case 'MY_API_SECTOR_ROUTES-ACTION_OR_ENDPOINT_NAME':
-				this.route += 'MYAPIPATH/ENDPOINTPAGE'
-				this.method = 'post'
-				this.mode = true
-			break
-
-			//others...
-
-			/* - - - - - - - - - - - - - */
-
-			default: undefined;
-
-		}
-
-		return this.method!=undefined ? this : false
-
-	}
-
 }
+
+api.configuration({
+
+	baseroute: 'http://myapiurl:myport',
+	debugger: 2, //from 0 to 3
+
+	sectors: [{
+
+		name: 'mySecotorSplitter',
+		path: '/my/api/real/sector/path/',
+		actions: [{
+			endpoint: 'myRealEndpointFile',
+			method: 'POST',
+			mode: 'async'
+		},{
+			endpoint: 'myRealEndpointFileSync',
+			method: 'POST',
+			mode: 'linear'
+		},/*your other api endpoints*/]
+
+	},/*your other api sectors*/]
+
+})
