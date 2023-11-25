@@ -162,7 +162,6 @@ You can use all you want into the form, or not use the form with a complete new 
 
     </html>
   ```
-  <br>
 
 - _XHR LINEAR (no async await):_ use asset to call the class for talk with your api walkie talkie like this:
 
@@ -189,9 +188,8 @@ You can use all you want into the form, or not use the form with a complete new 
   ```
 
   How you can easy see, after setted a target in profile and the correct params of your api endpoint, you have 2 callback:
-  - progress return the object with progression data sended (an exemple, the bytes and percentage of file sending) and it is called for many times how steps needed for completation (or failing)
-  - results is the final data resulted of operations... the payloads, the restful json object of end operations
-   <br>
+  1. progress return the object with progression data sended (an exemple, the bytes and percentage of file sending) and it is called for many times how steps needed for completation (or failing)
+  2. results is the final data resulted of operations... the payloads, the restful json object of end operations
 
 - _XHR ASYNC:_ in an async function or asset, use below codes to call the class for talk with your api walkie talkie like this:
 
