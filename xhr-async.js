@@ -6,7 +6,7 @@
 //: https://www.restapitutorial.com/lessons/httpmethods.html
 //:
 //: Some good roles for a good unversal response from server:
-//: 1) in header set, minimum, this status codes: (0,1,2,3,4,400,401,402,403,404,500,501,508)
+//: 1) in header set, minimum, this status codes: (0,1,2,3,4,400,401,402,403,404,500,501,504,508)
 //: 2) my server response {
 //: 	errors:  true, 				// false if fail, true if computable! not code here!
 //: 	message: "we recived good", // false if nothing, message for success/error!
@@ -87,6 +87,7 @@ export const api = new class API {
 				// set xhr extras
 
 				
+				request.timeout  = this.config.timeout||7000
 				request.debugger = this.config.debugger||0
 				request.method 	 = routed.method.toUpperCase()||'no method finded!'
 				request.route 	 = routed.url||'no route finded!'
@@ -114,6 +115,24 @@ export const api = new class API {
 					request.open( request.method, request.route, (request.mode=='async'?true:false) )
 					request.setRequestHeader('content-type','application/json')
 
+
+				}
+
+
+				// override or extend headers
+
+
+				if ( this.config.header.length % 2 === 0 ) {
+
+					for ( let i = 0; i < this.config.header.length; i += 2 ) {
+
+						request.setRequestHeader( this.config.header[i] , this.config.header[i + 1] )
+
+					}
+
+				} else if ( this.config.header.length > 0 ) {
+
+					this.log({},{},501,"CLIENT API ERROR: CUSTOM HEADERS NEED PAIR KEY:VALUE, SO: [ key,value, key,value, key,value, ...]")
 
 				}
 
@@ -198,6 +217,12 @@ export const api = new class API {
 				}
 
 
+				request.ontimeout = () => {
+
+					this.log({},{},504,"CLIENT API MESSAGE: CONNECTION IS DONE IN TIMEOUT")
+
+				}
+
 				request.send ( data )
 
 
@@ -253,6 +278,7 @@ export const api = new class API {
 			case 404: request.warning = 'File/Page not found'; break;
 			case 500: request.warning = 'Inner server error'; break;
 			case 501: request.warning = 'Bad API requesting'; break;
+			case 504: request.warning = 'Server didn\'t respond'; break;
 			case 508: request.warning = 'Server Resouces Overloaded'; break;
 			default: 'Unknown error ~ status: "'+request.status+'" / message: "'+request.message+'"'; break;
 
@@ -308,7 +334,15 @@ export const api = new class API {
 // 	// THIS IS A MODEL, SET YOUR CONFIG HERE OR IN EXTERNAL FILE
 //
 // 	baseroute: 'http://myapiurl:myport',
-// 	debugger: 2, //from 0 to 3
+//
+//	other options:
+//  debugger: 2,                         // from 0 (no logs) to 3 (full logs)
+//  timeout: 7000,                       // custom timeout of call
+//  header: [                            // if you need extend the headers of call
+//    key, value,
+//    key, value,
+//    key, value
+//  ],
 //
 // 	sectors: [{
 //

@@ -92,7 +92,15 @@ You can use all you want into the form, or not use the form with a complete new 
   api.configuration({
 
     baseroute: 'http://myapiurl:myport',    // it's your base api url
-    debugger: 2,                            // from 0 (no logs) to 3 (full logs)
+
+    // other options:
+    // debugger: 2,                         // from 0 (no logs) to 3 (full logs)
+    // timeout: 7000,                       // custom timeout of call
+    // header: [                            // if you need extend the headers of call
+    //    key, value,
+    //    key, value,
+    //    key, value
+    // ],
 
     sectors: [{                             // it's the lists of your sections and endpoints
 
