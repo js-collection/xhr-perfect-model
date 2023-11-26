@@ -23,12 +23,13 @@
 This is an asset model for make the smallest xhr walkie-talkie system (so it collects the data of a form and packages it for sending to the server and waits for or tracks a response) into the client side pages. <br>
 
 #### WHY CHOOSE IT?
-Unlike some other competitors, this system does not have compilers, special protocols or framework but it's a simple micro-library. Its strength is in its simplicity... It is a simple "walkie-talkie" method created in simple vanilla Js and web APIs. Anyway, you can get the results of call, the progession of it and, from this version, we introduce a super little router (a simple loop of object like a json) for track your api's paths and enpoints. All of this system doesn't have affect on server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
+**Unlike some other competitors oriented to a general purpose coding, this system likes the KISS principles (Keep It Simple, Stupid) and does not have protocols, it isn't a framework, doen't have a sub library, doesn't have compilers or over-compiled code (like TS) and doesn't have a complex coding but it's a simple, most readable, micro-library. Its strength is in its simplicity**... It is a simple "walkie-talkie" method created in simple vanilla Js and web APIs. Anyway, you can get the results of call, the progession of it and, from this version, we introduce a super little router (a simple loop of object like a json) for track your api's paths and enpoints. All of this system doesn't have affect on server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
 
 #### WHO DID THAT?
 This is an open project built by Alberto Marangelo (@berto-dev) [¹](https://berto.dev) [²](https://github.com/berto-dev) for Deveet Technologies [¹](https://deveet.com) [²](https://github.com/Deveet-Technologies)<br>
 <sup>If you use in your blog it's a good idea to include <i>"taken from original GITPAGE of the AUTHORSLINK"</i></sup>
 <br><br>
+
 
 ## 🆘 Before flight:
 - **Remember**: This is the client side script, it's not the server side!<br>
@@ -72,21 +73,19 @@ You can use all you want into the form, or not use the form with a complete new 
 
 - Load class into you web page, like this:
   ```js
-  script type="module" src="xhr-linear.js"></script> //or xhr-async.js or rename it
+  <script type="module" src="xhr-linear.js"></script> //or xhr-async.js or rename it
   ```
-  Experimental feature: (not now...)
-  ```js
-  window.api //get it via global exporting
-  ```
+  Experimental import feature: (not now...)
   ```js
   import { api } from 'xhr-perfect-model/xhr-linear.js';
-  api ... //get it like npm import js file
+  //or
+  import * as api from 'xhr-perfect-model/xhr-linear.js';
   ```
 
 - Configuration of your api roots:<br>
   You can make a config inside the xhr-async|linear.js:
   ```js
-  // const api = new class API {
+  // export const api = new class API {
   //    and other parts of the class, you don't need to touch it
   // }
 
@@ -112,6 +111,7 @@ You can use all you want into the form, or not use the form with a complete new 
     },/*your other api sectors*/]
 
   })
+
   ```
   or, if you want, you can put the config outside and import it like this:
   ```js
@@ -206,12 +206,12 @@ You can use all you want into the form, or not use the form with a complete new 
 
   // style zero (no async ~ await is not required)
   // for this approach we raccommend the linear script type
+  // NB: this style of "callbacks" and the use of "then" will lead to an inevitable "callback hell"
   await api.transfer(
       myCallProfile,
       progress=> { console.log("progress:", progress) },
       result=> { console.log("results:", result) }
   )
-  
 
   // api call style models : style one (partial sync)
   const results = await api.transfer( myCallProfile, progress => { console.log("progress:", progress) }).results()

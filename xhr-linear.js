@@ -16,7 +16,7 @@
 //: tips
 //: do you want external congifig? it's easy!! read the reference!
 
-const api = new class API {
+export const api = new class API {
 
 	configuration(object){
 
@@ -283,5 +283,3 @@ const api = new class API {
 // 	},/*your other api sectors*/]
 //
 // })
-
-export default api; typeof window === 'undefined' ? null : window.api = api

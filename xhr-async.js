@@ -17,7 +17,7 @@
 //: do you want external congifig? it's easy!! read the reference!
 
 
-const api = new class API {
+export const api = new class API {
 
 	configuration(object){
 
