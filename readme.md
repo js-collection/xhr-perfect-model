@@ -23,7 +23,7 @@
 This is an asset model for make the smallest xhr walkie-talkie system (so it collects the data of a form and packages it for sending to the server and waits for or tracks a response) into the client side pages. <br>
 
 #### WHY CHOOSE IT?
-**Unlike some other competitors oriented to a general purpose coding, this system likes the KISS principles (Keep It Simple, Stupid) and does not have protocols, it isn't a framework, doen't have a sub library, doesn't have compilers or over-compiled code (like TS) and doesn't have a complex coding but it's a simple, most readable, micro-library. Its strength is in its simplicity**... It is a simple "walkie-talkie" method created in simple vanilla Js and web APIs. Anyway, you can get the results of call, the progession of it and, from this version, we introduce a super little router (a simple loop of object like a json) for track your api's paths and enpoints. All of this system doesn't have affect on server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
+**Unlike some other competitors oriented to a general purpose coding, _this system likes the KISS principles (Keep It Simple, Stupid) and DRY (Do not Repeat Yourself) and does not have protocols, it isn't a framework, doen't have a sub library, doesn't have compilers or over-compiled code (like TS), have only 2 inner methods and doesn't have a complex coding but it's a simple, most readable, micro-library ( less 10kb )_. Its strength is in its simplicity**... It is a simple "walkie-talkie" method created in simple vanilla Js and web APIs. Anyway, you can get the results of call, the progession of it and, from this version, we introduce a super little router (a simple loop of object like a json) for track your api's paths and enpoints. All of this system doesn't have affect on server sides and only requires a response json similar to common standards such as those suggested in the code and in the manual. That's all ;)<br>
 
 #### WHO DID THAT?
 This is an open project built by Alberto Marangelo (@berto-dev) [¹](https://berto.dev) [²](https://github.com/berto-dev) for Deveet Technologies [¹](https://deveet.com) [²](https://github.com/Deveet-Technologies)<br>
@@ -33,8 +33,7 @@ This is an open project built by Alberto Marangelo (@berto-dev) [¹](https://ber
 
 ## 🆘 Before flight:
 - **Remember**: This is the client side script, it's not the server side!<br>
-- **Remember** to change your api base root the class in place of the [`http://yoursitewithapi:YOURPORTNUMBER/`](https://github.com/js-collection/xhr-perfect-model/blob/development/xhr-classic.js#L2) placeholder.<br>
-- **Remember** to register your api into the class in place of the [`connectors_ENDPOINT_SECTOR`](https://github.com/js-collection/xhr-perfect-model/blob/development/xhr-classic.js#L175) placeholder. You can registre infinite api sectors.<br>
+- **Remember**: You can't export both script! Choose the async or the linear!<br>
 - **SYNC ASYNC IN SHORT**: Sync and Async scripts are both the same but the first it's liniear and much simple to undestanding. Instead, the async offer more possibilities and rapidity to execution, but need to be encapsulated into an async function wrapper and inside have more complex syntax... For someone the async rappresent a [chaos and hard programming style](https://www.google.com/search?q=async+it%27s+too+complex&oq=async+it%27s+too+complex&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg80gEJMTA3MTdqMGo0qAIAsAIA&sourceid=chrome&ie=UTF-8#ip=1) but, again, for other one, Sync is not good because can encurred in a ["callback hell"](https://www.google.com/search?q=what%27s+callback+hell&oq=callback+hell+what&gs_lcrp=EgZjaHJvbWUqCAgBEAAYFhgeMgYIABBFGDkyCAgBEAAYFhge0gEIMzY3OGowajeoAgCwAgA&sourceid=chrome&ie=UTF-8)... it's a choose.<br><br>
 
 ## *️⃣ What it do:
@@ -75,8 +74,12 @@ You can use all you want into the form, or not use the form with a complete new 
   ```js
   <script type="module" src="xhr-linear.js"></script> //or xhr-async.js or rename it
   ```
-  Experimental import feature: (not now...)
+  WARNING: NPM Experimental import feature: (not now...)
   ```js
+  // install from NPM:
+  // npm i xhr-perfect-model
+
+  // import once script
   import { api } from 'xhr-perfect-model/xhr-linear.js';
   //or
   import * as api from 'xhr-perfect-model/xhr-linear.js';
