@@ -1,6 +1,6 @@
-[<sub>![](https://img.shields.io/badge/❮❮_BACK_TO_COLLECTION_HOMEPAGE-lavender.svg)</sub>](https://github.com/js-collection)
+[<sub>![](https://img.shields.io/badge/❮❮_BACK_TO_COLLECTION_HOMEPAGE-lavender.svg)</sub>](https://github.com/js-collection) 
 ---
-# xhr-perfect-model
+# xhr-perfect-model ⋮ <sub> ![](https://img.shields.io/badge/DEVELOPMENT_BRANCH-red?style=for-the-badge) </sub>
 
 <a href="https://github.com/sponsors/js-collection">
   <img src="./.depot/banner.jsperfectxhr.webp" alt="javascript xhr open source api system">
