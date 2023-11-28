@@ -1,6 +1,6 @@
 {
     "name": "xhr-perfect-model",
-    "version": "2.0.1",
+    "version": "2.0.3-in-development",
     "description": "The smallest asset to build the smallest xhr walkie-talkie RESTful API system",
     "exports": {
         "./xhr-async.js": {
