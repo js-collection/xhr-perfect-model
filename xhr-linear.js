@@ -62,7 +62,7 @@ const api = new class API {
 
 		}
 
-		if ( !profile.target || !profile.params || profile.profile.params.file && profile.profile.params.file.count>0 ) {
+		if ( !profile.target || !profile.params || profile.params.file && profile.params.file.count>0 ) {
 
 
 			let message = "CLIENT API ERROR: CONNECTOR WRONG ~ "+ ( !profile.target || !profile.params ? "NO CORRECT PROFILE SETTED" : "ONLY ONE FILE FOR CONNECTION" )
