@@ -35,7 +35,7 @@ const api = new class API {
 				if ( routed = sector.actions.find( voice => voice.endpoint === targetName ) ) {
 
 					return {
-						url    : this.config.baseroute+(('/'+sector.path+'/'+routed.endpoint).replace(/\/\//g, "/")),
+						url    : (this.config.baseroute.replace(/\/$/, ''))+('/'+sector.path+'/'+routed.endpoint).replace(/\/\//g, "/"),
 						method : routed.method.toUpperCase(),
 						mode   : routed.mode
 					}
